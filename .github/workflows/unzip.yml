@@ -1,0 +1,23 @@
+name: Unzip pwa product
+
+on:
+  workflow_dispatch:
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Unzip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
+          unzip -o pwa-product.zip
+          rm pwa-product.zip
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "Unzip pwa product"
+          add: '.'
+          author_name: 'GitHub Actions'
+          author_email: 'actions@github.com'
